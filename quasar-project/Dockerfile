@@ -1,23 +1,27 @@
-# Use an official Node runtime as a parent image
+# Use an official Node.js runtime as a parent image
 FROM node:lts as build-stage
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json and package-lock.json (if available)
 COPY package*.json ./
 
-# Install project dependencies
-RUN npm install
+# Install Quasar CLI globally and project dependencies
+RUN npm install -g @quasar/cli && npm install
 
 # Copy the current directory contents into the container at /app
 COPY . .
 
-# build app for production with minification
+# Build the Quasar project
 RUN quasar build
 
-# Stage 2: Setup serve to serve static files from dist/spa
+# Stage 2: Serve the static files using Nginx
 FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage /app/dist/spa /usr/share/nginx/html
+
+# Expose port 80 to the outside world
 EXPOSE 80
+
+# Command to run the Nginx server
 CMD ["nginx", "-g", "daemon off;"]
