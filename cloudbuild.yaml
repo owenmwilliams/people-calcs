@@ -1,6 +1,5 @@
-  options:
-    logging: LEGACY  # Optional, depending on your preference
-    logsBucket: 'gs://people-calcs-build-logs'
+
+  logsBucket: 'gs://people-calcs-build-logs'
   steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
