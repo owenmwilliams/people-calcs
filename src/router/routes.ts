@@ -4,7 +4,8 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
+    // THIS IS WHERE WE NEED A HOMEPAGE TO SHOW UP
+    // children: [{ path: '', component: () => import('pages/AboutPage.vue') }],
   },
 
   // Always leave this as last one,
@@ -16,6 +17,10 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/calculators',
     component: () => import('layouts/CalculationsLayout.vue'),
+  },
+  {
+    path: '/about',
+    component: () => import('pages/AboutPage.vue'),
   }
 ];
 
