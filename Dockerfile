@@ -18,9 +18,17 @@ RUN quasar build
 
 # Stage 2: Serve the static files using Nginx
 FROM nginx:stable-alpine as production-stage
+
+# Remove the default Nginx configuration file
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Copy the custom Nginx configuration file
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+
+# Copy the built app to Nginx
 COPY --from=build-stage /app/dist/spa /usr/share/nginx/html
 
-# Expose port 80 to the outside world
+# Expose port 8080 to the outside world
 EXPOSE 8080
 
 # Command to run the Nginx server
