@@ -23,7 +23,7 @@ FROM nginx:stable-alpine as production-stage
 RUN rm /etc/nginx/conf.d/default.conf
 
 # Copy the custom Nginx configuration file
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY .nginx/nginx.conf /etc/nginx/nginx.conf
 
 # Copy the built app to Nginx
 COPY --from=build-stage /app/dist/spa /usr/share/nginx/html
