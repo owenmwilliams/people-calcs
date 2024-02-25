@@ -5,8 +5,11 @@
         </q-card-section>
         <q-card-section horizontal class="row">
             <div class="col-3 q-pa-lg">
-                <q-input class="q-mb-md" v-model.number="totalPoolSize" type="number" label="Total pool size" :rules="[validatePositive]" />
-                <q-input v-model.number="targetTimeFrame" type="number" label="Target time frame" :rules="[validatePositive]" />
+                <div class="row q-mb-md">
+                    <q-input class="col-6 q-pa-sm" v-model.number="totalPoolSize" type="number" label="Total pool size" :rules="[validatePositive]" />
+                    <q-input class="col-6 q-pa-sm" v-model.number="targetTimeFrame" type="number" label="Target time frame" :rules="[validatePositive]" suffix="years" />
+                </div>
+                
                 <q-badge color="secondary">
                     Annual retention rate: {{ retentionRate }}%
                 </q-badge>
