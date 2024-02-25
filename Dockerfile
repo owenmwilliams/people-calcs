@@ -21,7 +21,7 @@ FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage /app/dist/spa /usr/share/nginx/html
 
 # Expose port 80 to the outside world
-EXPOSE 80
+EXPOSE 8080
 
 # Command to run the Nginx server
 CMD ["nginx", "-g", "daemon off;"]
