@@ -1,9 +1,9 @@
 {
   "name": "quasar-project",
   "version": "0.0.1",
-  "description": "A project to build a bunch of common HR calcs.",
-  "productName": "HR Calcs",
-  "author": "Owen Williams <owenm.williams@gmail.com>",
+  "description": "A project to build a bunch of workforce calculators and blog about them.",
+  "productName": "Workforce Analytics",
+  "author": "Owen Williams <owen@we3kings.dev>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./",

@@ -1,8 +1,5 @@
-<template>
-  <!-- <Suspense> -->
-  
+<template>  
     <MainLayout />
-  <!-- </Suspense> -->
 </template>
 
 <script setup lang="ts">

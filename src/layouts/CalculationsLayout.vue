@@ -14,7 +14,7 @@
             </q-item>
         </q-list>
         <div class="col-10 col-grow q-pa-md">
-            <AttritionCalc v-if="calculatorChoice == 'Class Builder'" />
+            <AttritionCalc v-if="calculatorChoice == 'Class builder'" />
             <BuildInProgress v-else />
         </div>
     </div>
@@ -26,8 +26,8 @@ import BuildInProgress from 'src/pages/BuildInProgress.vue';
 
 import { ref } from 'vue';
 
-  const calculatorChoice = ref('Class Builder');
-  const calculatorChoiceOptions = ['Class Builder', 'Reduction in Force', 'Succession Planning', 'Workforce Planning'];
+  const calculatorChoice = ref('Class builder');
+  const calculatorChoiceOptions = ['Class builder', 'Recruitment funnel', 'Reduction in force'] //'Reduction in Force', 'Succession Planning', 'Workforce Planning'];
 
     const leftDrawerOpen = ref(false);
 

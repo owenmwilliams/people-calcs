@@ -1,4 +1,4 @@
-# HR Calcs (quasar-project)
+# WF Calcs (quasar-project)
 
 A project to build a bunch of common HR calcs.
 

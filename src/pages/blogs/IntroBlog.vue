@@ -1,9 +1,9 @@
 <template>
-    <div class="text-h4 q-pb-lg q-px-md">
+    <div class="text-h4 q-pt-lg q-pb-md q-px-md">
         Workforce calculators: building a people-advantage through analytics
     </div>
 
-    <div class="text-h6 q-pa-md text-weight-normal">
+    <div class="text-body1 q-pa-md text-weight-normal">
         By Owen M. Williams
     </div>
     
