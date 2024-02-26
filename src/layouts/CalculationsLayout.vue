@@ -1,7 +1,15 @@
 <template>
     <div class="row inline no-wrap full-width">
         <q-list class="col-2">
-            <q-item clickable v-ripple v-for="choice in calculatorChoiceOptions" :key="choice" :disable="choice == calculatorChoice" @click="calculatorChoice = choice">
+            <q-item 
+                clickable 
+                v-ripple 
+                v-for="choice in calculatorChoiceOptions" 
+                :key="choice" 
+                :disable="choice == calculatorChoice"
+                :active="choice == calculatorChoice"
+                active-class="bg-accent text-white"
+                @click="calculatorChoice = choice">
                 <q-item-section>{{ choice }}</q-item-section>
             </q-item>
         </q-list>

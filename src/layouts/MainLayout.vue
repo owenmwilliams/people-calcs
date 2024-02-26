@@ -8,8 +8,8 @@
         
       </q-toolbar>
       <q-tabs>
+        <q-route-tab to="/blog/introduction" label="Blog" />
         <q-route-tab to="/calculators" label="Calculators" />
-        <q-route-tab to="/blog" label="Blog" />
         <q-route-tab to="/about" label="About" />
       </q-tabs>
     </q-header>

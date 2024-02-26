@@ -1,18 +1,18 @@
 <template>
     <q-page class="flex flex-center">
       <div>
-        <div class="text-h5 q-my-md">About Us</div>
+        <!-- <div class="text-h4 q-my-md">About Us</div> -->
         <p>
           We work with people, talent and HR teams to build the analytics they need to build better teams. All tools on this website are provided free of charge.
         </p>
   
-        <div class="text-h6 q-my-md">Get in Touch</div>
-        <q-form @submit="onSubmit" class="q-gutter-md">
+        <div class="text-h6 q-my-md">If you want to get in touch, you can reach us at support@we3kings.dev</div>
+        <!-- <q-form @submit="onSubmit" class="q-gutter-md">
           <q-input filled v-model="contact.name" label="Your Name" />
           <q-input filled v-model="contact.email" label="Your Email" />
           <q-input filled v-model="contact.message" type="textarea" label="Your Message" />
           <q-btn label="Submit" type="submit" color="primary" />
-        </q-form>
+        </q-form> -->
       </div>
     </q-page>
   </template>

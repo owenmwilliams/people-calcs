@@ -5,14 +5,7 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     // THIS IS WHERE WE NEED A HOMEPAGE TO SHOW UP
-    // children: [{ path: '', component: () => import('pages/AboutPage.vue') }],
-  },
-
-  // Always leave this as last one,
-  // but you can also remove it
-  {
-    path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
+    children: [{ path: '', component: () => import('pages/BuildInProgress.vue') }],
   },
   {
     path: '/calculators',
@@ -21,6 +14,20 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/about',
     component: () => import('pages/AboutPage.vue'),
+  }
+  ,
+  {
+    path: '/blog/:post',
+    name: 'blog',
+    component: () => import('layouts/BlogLayout.vue'),
+    props: true,
+  },
+
+  // Always leave this as last one,
+  // but you can also remove it
+  {
+    path: '/:catchAll(.*)*',
+    component: () => import('pages/ErrorNotFound.vue'),
   }
 ];
 
