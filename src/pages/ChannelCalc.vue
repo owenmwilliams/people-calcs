@@ -24,6 +24,7 @@
                         We've found a total of {{ uniqueInteractions?.length }} types of interactions across <span class="text-weight-medium text-h6 text-accent">{{ uniqueUsers?.length }} distinct hires</span>.
                     </q-card-section>
                     <q-card-actions align="right">
+                        <q-btn flat color="primary" label="Download template" @click="downloadTemplate" />
                         <!-- <q-btn flat color="primary" label="Generate graph" @click="generateSeries" /> -->
                     </q-card-actions>
                 </q-card>
@@ -101,6 +102,17 @@ onMounted(async () => {
 
 
 });
+
+const downloadTemplate = () => {
+    const url = 'https://storage.googleapis.com/people-calcs-data/dummy_data.csv';
+
+      // Create an anchor element and trigger the download
+      const a = document.createElement('a');
+      a.href = url;
+      document.body.appendChild(a); // Append the anchor to the body
+      a.click(); // Trigger the download
+      document.body.removeChild(a); // Clean up and remove the anchor element
+}
 
 const generateArray = () => {
     let returnArray = uniqueInteractions.value?.map((interaction) => {
