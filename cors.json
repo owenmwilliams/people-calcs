@@ -1,0 +1,10 @@
+
+    [
+      {
+        "origin": ["https://workforcecalculator.com", "https://www.workforcecalculator.com", "localhost:9000", "http://localhost:9000", "http://localhost:9000/"],
+        "method": ["GET"],
+        "responseHeader": ["Content-Type"],
+        "maxAgeSeconds": 3600
+      }
+    ]
+  

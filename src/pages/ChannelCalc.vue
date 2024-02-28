@@ -5,18 +5,8 @@
         </q-card-section>
         <q-card-section horizontal class="row">
             <div class="col-3 q-pa-lg">
-                <!-- <div class="row q-mb-md">
-                    <q-input class="col-6 q-pa-sm" v-model.number="decayFactor" type="number" label="Total pool size" :rules="[validatePositive]" />
-                    <q-input class="col-6 q-pa-sm" v-model.number="targetTimeFrame" type="number" label="Target time frame" :rules="[validatePositive]" suffix="years" />
-                </div> -->
-                <q-badge color="secondary">
-                    Start date: {{ dateRange?.from }}
-                </q-badge>
-                <q-badge color="secondary">
-                    End date: {{ dateRange?.to }}
-                </q-badge>
                 <q-date v-model="dateRange" range />
-                <q-badge color="secondary">
+                <q-badge color="secondary" class="q-mt-md">
                     Time decay factor: {{ decayFactor }}%
                 </q-badge>
                 <q-slider
@@ -31,7 +21,7 @@
 
                 <q-card flat>
                     <q-card-section class="card-words">
-                        We've found a total of {{ uniqueInteractions?.length }} types of interactions across <span class="text-weight-medium text-h6 text-accent">{{ uniqueUsers?.length }} total hires</span>.
+                        We've found a total of {{ uniqueInteractions?.length }} types of interactions across <span class="text-weight-medium text-h6 text-accent">{{ uniqueUsers?.length }} distinct hires</span>.
                     </q-card-section>
                     <q-card-actions align="right">
                         <!-- <q-btn flat color="primary" label="Generate graph" @click="generateSeries" /> -->
@@ -93,7 +83,7 @@ const attribution = ref<any[]>();
 
 onMounted(async () => {
   try {
-    const response = await fetch('/../../public/data/dummy_data.csv'); // Adjust the path
+    const response = await fetch('https://storage.googleapis.com/people-calcs-data/dummy_data.csv');
     const csvText = await response.text();
     Papa.parse(csvText, {
       complete: (result: any) => {
