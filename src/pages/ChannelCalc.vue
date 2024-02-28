@@ -1,10 +1,16 @@
 <template>
-    <q-card class="align-center" style="width: 100%; height:100%;">
+    <q-card class="align-center relative-position" style="width: 100%; height:100%;">
         <q-card-section class="text-h4 text-center text-weight-bold">
             Recruitment Channel Calculator
         </q-card-section>
         <q-card-section horizontal class="row">
             <div class="col-3 q-pa-lg">
+                <div class="row full-width">
+                    <q-file class="col-9" v-model="upload" label="Upload touchpoints" />
+                    <q-space />
+                    <q-btn class="col-3" flat color="accent" label="Submit" @click="onSubmit" />
+                </div>
+                
                 <q-date v-model="dateRange" range />
                 <q-badge color="secondary" class="q-mt-md">
                     Time decay factor: {{ decayFactor }}%
@@ -17,6 +23,8 @@
                     label
                     :label-value="decayFactor + '%'"
                     color='grey-8'
+                    
+                    
                 />
 
                 <q-card flat>
@@ -24,38 +32,38 @@
                         We've found a total of {{ uniqueInteractions?.length }} types of interactions across <span class="text-weight-medium text-h6 text-accent">{{ uniqueUsers?.length }} distinct hires</span>.
                     </q-card-section>
                     <q-card-actions align="right">
-                        <q-btn flat color="primary" label="Download template" @click="downloadTemplate" />
-                        <q-btn flat color="primary" label="Submit" @click="onSubmit" />
-                        <q-file v-model="upload" label="New file" />
+                        <q-btn flat color="primary" label="Download template" @click="downloadTemplate" />                        
                     </q-card-actions>
                 </q-card>
                 
             </div>
             <div class="col-9 q-pa-lg">
-                <!-- {{ touchpointsArray }} -->
-                <!-- {{ decayFactor }} -->
-                <!-- {{ dateRange }} -->
-                <!-- {{ uniqueUsers }} -->
-                <!-- {{ uniqueInteractions }} -->
-                <!-- {{ attribution }} -->
-                <!-- {{ tableColumns }} -->
-
                 <q-table
                     :rows="attribution"
                     :columns="tableColumns"
                     row-key="name"
                     :rows-per-page-options="[10, 25, 50]"
                 />
-
-                <!-- <apexchart type="bar" :options="chartOptions" :series="series"></apexchart> -->
             </div>
         </q-card-section>
+        <q-inner-loading
+            :showing="isLoading"
+            label="Calculating attribution..."
+            label-class="text-positive"
+            label-style="font-size: 2.0em"
+        />
     </q-card>
 </template>
   
 <script setup lang="ts">
-import { ref, onMounted, computed, watch } from 'vue';
+import { ref, onMounted, computed, watch, nextTick } from 'vue';
 import Papa from 'papaparse';
+import { useQuasar } from 'quasar';
+
+const emits = defineEmits(['start-loading', 'finish-loading'])
+
+const $q = useQuasar()
+const isLoading = ref(false);
 
 interface touchPoint {
     interaction: string,
@@ -67,8 +75,20 @@ const decayFactor = ref<number>(80);
 
 const touchpointsArray = ref<touchPoint[]>();
 const upload = ref<any[]>();
-
 const dateRange = ref<any>();
+
+const isLargeFile = computed(() => {
+    if (Number(touchpointsArray.value?.length ?? 0) >= 10000) {
+        console.log('computed touchpoints length is', touchpointsArray.value?.length)
+        console.log('return is: true')
+        return true;
+    } else {
+        console.log('computed touchpoints length is', touchpointsArray.value?.length)
+        console.log('return is: false')
+        return false;
+    }
+});
+
 const uniqueUsers = computed(() => {
     return touchpointsArray.value?.map((touchpoint) => touchpoint.user_id)
     
@@ -102,8 +122,6 @@ onMounted(async () => {
   } catch (error) {
     console.error('Error loading CSV:', error);
   }
-
-
 });
 
 const downloadTemplate = () => {
@@ -174,20 +192,11 @@ const generateArray = () => {
                 if (tempInteractionsLength % 2 == 0) {
                     // EVEN
                     if ((j+1) > Math.ceil((tempInteractions?.length ?? 0) / 2)) {
-                        // (1-$S$3)
-                        // /(1-$S$3^G2)
-                        // *$S$3^(F2-D2)
-                        // /2
-                        
                         object.uShapedAttribution = object.uShapedAttribution + 
                         (1 - decayDecimal) 
                         / (1 - Math.pow(decayDecimal, Math.ceil(tempInteractionsLength / 2))) 
                         * Math.pow(decayDecimal, (tempInteractionsLength - (j + 1))) / 2;
                     } else {
-                        // (1-$S$3)
-                        // /(1-$S$3^G2)
-                        // *$S$3^(D2-1)
-                        // /2
                         object.uShapedAttribution = object.uShapedAttribution + 
                         (1 - decayDecimal) 
                         / (1 - Math.pow(decayDecimal, Math.ceil(tempInteractionsLength / 2))) 
@@ -196,24 +205,6 @@ const generateArray = () => {
                 } else {
                     // ODD
                     if ((j+1) < Math.ceil((tempInteractions?.length ?? 0) / 2)) {
-
-                        // FROM EXCEL
-
-                        // (
-                        // (1-$S$3)
-                        // /(1-$S$3^F2)
-                        // *$S$3^(D2*2-2)
-                        // /2
-                        // )
-                        
-                        // +
-
-                        // (
-                        // (1-$S$3)
-                        // /(1-$S$3^F2)
-                        // *$S$3^(D2*2-1)
-                        // /2
-                        // )
 
                         object.uShapedAttribution = object.uShapedAttribution + 
 
@@ -233,24 +224,6 @@ const generateArray = () => {
                         / 2)
                         ;
                     } else if ((j+1) > Math.ceil((tempInteractions?.length ?? 0) / 2)) {
-                        
-                        // FROM EXCEL
-
-                        // (
-                        // (1-$S$3)
-                        // /(1-$S$3^F2)
-                        // *$S$3^((F2-D2)*2
-                        // /2
-                        // )
-                        
-                        // +
-                        
-                        // (
-                        // (1-$S$3)
-                        // /(1-$S$3^F2)
-                        // *$S$3^((F2-D2)*2+1)
-                        // /2
-                        // )
 
                         object.uShapedAttribution = object.uShapedAttribution + 
                         
@@ -272,11 +245,6 @@ const generateArray = () => {
 
                     } else {
                         
-                        // FROM EXCEL
-
-                        // (1-$S$3)
-                        // /(1-$S$3^F2)
-                        // *$S$3^(F2-1)
                         object.uShapedAttribution = object.uShapedAttribution + 
                         (1 - decayDecimal) 
                         / (1 - Math.pow(decayDecimal, tempInteractionsLength)) 
@@ -301,63 +269,76 @@ const generateArray = () => {
 
 // watcher to watch if the date range is updated
 watch(dateRange, (newVal, oldVal) => {
-    generateArray();
+    if (isLargeFile.value) {
+        $q.notify({
+            message: 'Too many touchpoints to process, click submit to recalculate with new date range',
+            color: 'negative',
+            position: 'center'
+        })
+        touchpointsArray.value = [];
+    } else {
+        generateArray();
+    }
 })
 
 watch(decayFactor, (newVal, oldVal) => {
-    generateArray();
+    if (isLargeFile.value) {
+        $q.notify({
+            message: 'Too many touchpoints to process, click submit to recalculate with new decay factor',
+            color: 'negative',
+            position: 'center'
+        })
+        touchpointsArray.value = [];
+    } else {
+        generateArray();
+    }
 })
 
-const onSubmit = () => {
-  touchpointsArray.value = []; // Reset array
+const onSubmit = async () => {
+    isLoading.value = true; // Show loader
 
-  if (upload.value instanceof File) { // Check if upload.value is a File
-    const reader = new FileReader();
-    
-    reader.onload = (e) => {
-      const csvText = e.target?.result;
-
-      console.log('CSV Text:', csvText);
-      
-      Papa.parse(csvText, {
-        complete: (result: any) => {
-          touchpointsArray.value = result.data as touchPoint[]; // Assuming the structure matches your touchPoint[] type
-          generateArray(); // Call generateArray once parsing is complete
-        },
-        header: true, // Adjust based on whether your CSV has headers
-        skipEmptyLines: true,
-        dynamicTyping: true, // Automatically convert numeric values from strings
-      });
-    };
-
-    reader.onerror = (error) => console.error('Error reading CSV:', error);
-    
-    reader.readAsText(upload.value); // Read the file content
-
-    generateArray();
-  } else {
-    console.error('Upload is not a file');
-  }
+    try {
+      await startProcessing(); // Await the completion of startProcessing
+    } catch (error) {
+      console.error('Processing failed:', error);
+    } finally {
+      isLoading.value = false; // Hide loader, regardless of success or error
+    }
 };
 
+const startProcessing = () => {
+  return new Promise<void>((resolve, reject) => {
+    if (upload.value instanceof File) {
+      const reader = new FileReader();
+      
+      reader.onload = (e) => {
+        const csvText = e.target?.result;
+        
+        Papa.parse(csvText, {
+          complete: (result: { data: touchPoint[] | undefined; }) => {
+            touchpointsArray.value = result.data; // Assuming the structure matches your touchPoint[] type
+            generateArray(); // Call generateArray once parsing is complete
+            resolve(); // Resolve the promise once parsing is complete
+          },
+          header: true,
+          skipEmptyLines: true,
+          dynamicTyping: true,
+        });
+      };
 
-// watch(upload, (newVal, oldVal) => {
-//     try {
-//         const csvText = upload.value;
-//         Papa.parse(csvText, {
-//         complete: (result: any) => {
-//             touchpointsArray.value = result.data as touchPoint[]; // Cast to your data type
-//         },
-//         header: true, // Set to false if your CSV doesn't have headers
-//         });
-//     } catch (error) {
-//         console.error('Error loading CSV:', error);
-//     }
-    
-//     // console.log("Upload changed")
-// })
+      reader.onerror = (error) => {
+        console.error('Error reading CSV:', error);
+        reject(error); // Reject the promise on error
+      };
+      
+      reader.readAsText(upload.value);
+    } else {
+      console.error('Upload is not a file');
+      reject(new Error('Upload is not a file')); // Reject the promise if no file is uploaded
+    }
+  });
+};
 
-// const tableColumns = ref(generateColumns(attribution.value ?? []));
 const tableColumns = ref([
     { name: 'name', label: 'Interaction type', field: 'name', sortable: true },
     { name: 'firstAttribution', label: 'First touchpoint', field: 'firstAttribution', sortable: true, format: (val: number, row: any) => `${(val * 100).toFixed(1)}%` },

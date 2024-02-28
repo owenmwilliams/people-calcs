@@ -15,7 +15,7 @@
         </q-list>
         <div class="col-10 col-grow q-pa-md">
             <AttritionCalc v-if="calculatorChoice == 'Class builder'" />
-            <ChannelCalc v-if="calculatorChoice == 'Recruitment channel'" />
+            <ChannelCalc v-else-if="calculatorChoice == 'Recruitment channel'" />
             <BuildInProgress v-else />
         </div>
     </div>
