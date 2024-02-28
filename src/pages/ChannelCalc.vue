@@ -25,7 +25,8 @@
                     </q-card-section>
                     <q-card-actions align="right">
                         <q-btn flat color="primary" label="Download template" @click="downloadTemplate" />
-                        <!-- <q-btn flat color="primary" label="Generate graph" @click="generateSeries" /> -->
+                        <q-btn flat color="primary" label="Submit" @click="onSubmit" />
+                        <q-file v-model="upload" label="New file" />
                     </q-card-actions>
                 </q-card>
                 
@@ -63,7 +64,10 @@ interface touchPoint {
 }
 
 const decayFactor = ref<number>(80);
+
 const touchpointsArray = ref<touchPoint[]>();
+const upload = ref<any[]>();
+
 const dateRange = ref<any>();
 const uniqueUsers = computed(() => {
     return touchpointsArray.value?.map((touchpoint) => touchpoint.user_id)
@@ -89,7 +93,6 @@ onMounted(async () => {
     Papa.parse(csvText, {
       complete: (result: any) => {
         touchpointsArray.value = result.data as touchPoint[]; // Cast to your data type
-        console.log(touchpointsArray.value); // You can remove this line; it's just for demonstration
       },
       header: true, // Set to false if your CSV doesn't have headers
     });
@@ -304,6 +307,55 @@ watch(dateRange, (newVal, oldVal) => {
 watch(decayFactor, (newVal, oldVal) => {
     generateArray();
 })
+
+const onSubmit = () => {
+  touchpointsArray.value = []; // Reset array
+
+  if (upload.value instanceof File) { // Check if upload.value is a File
+    const reader = new FileReader();
+    
+    reader.onload = (e) => {
+      const csvText = e.target?.result;
+
+      console.log('CSV Text:', csvText);
+      
+      Papa.parse(csvText, {
+        complete: (result: any) => {
+          touchpointsArray.value = result.data as touchPoint[]; // Assuming the structure matches your touchPoint[] type
+          generateArray(); // Call generateArray once parsing is complete
+        },
+        header: true, // Adjust based on whether your CSV has headers
+        skipEmptyLines: true,
+        dynamicTyping: true, // Automatically convert numeric values from strings
+      });
+    };
+
+    reader.onerror = (error) => console.error('Error reading CSV:', error);
+    
+    reader.readAsText(upload.value); // Read the file content
+
+    generateArray();
+  } else {
+    console.error('Upload is not a file');
+  }
+};
+
+
+// watch(upload, (newVal, oldVal) => {
+//     try {
+//         const csvText = upload.value;
+//         Papa.parse(csvText, {
+//         complete: (result: any) => {
+//             touchpointsArray.value = result.data as touchPoint[]; // Cast to your data type
+//         },
+//         header: true, // Set to false if your CSV doesn't have headers
+//         });
+//     } catch (error) {
+//         console.error('Error loading CSV:', error);
+//     }
+    
+//     // console.log("Upload changed")
+// })
 
 // const tableColumns = ref(generateColumns(attribution.value ?? []));
 const tableColumns = ref([
