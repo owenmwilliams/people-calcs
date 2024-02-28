@@ -15,6 +15,7 @@
         </q-list>
         <div class="col-10 col-grow q-pa-md">
             <AttritionCalc v-if="calculatorChoice == 'Class builder'" />
+            <ChannelCalc v-if="calculatorChoice == 'Recruitment channel'" />
             <BuildInProgress v-else />
         </div>
     </div>
@@ -22,12 +23,13 @@
 
 <script setup lang="ts">
 import AttritionCalc from 'src/pages/AttritionCalc.vue';
+import ChannelCalc from 'src/pages/ChannelCalc.vue';
 import BuildInProgress from 'src/pages/BuildInProgress.vue';
 
 import { ref } from 'vue';
 
   const calculatorChoice = ref('Class builder');
-  const calculatorChoiceOptions = ['Class builder', 'Recruitment funnel', 'Reduction in force'] //'Reduction in Force', 'Succession Planning', 'Workforce Planning'];
+  const calculatorChoiceOptions = ['Class builder', 'Recruitment channel', 'Reduction in force'] //'Reduction in Force', 'Succession Planning', 'Workforce Planning'];
 
     const leftDrawerOpen = ref(false);
 
