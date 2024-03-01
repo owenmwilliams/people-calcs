@@ -8,14 +8,11 @@ const routes: RouteRecordRaw[] = [
     children: [{ path: '', component: () => import('pages/BuildInProgress.vue') }],
   },
   {
-    path: '/calculators',
+    path: '/calculators/:calculator',
+    name: 'calculators',
     component: () => import('layouts/CalculationsLayout.vue'),
+    props: true,
   },
-  {
-    path: '/about',
-    component: () => import('pages/AboutPage.vue'),
-  }
-  ,
   {
     path: '/blog/:post',
     name: 'blog',

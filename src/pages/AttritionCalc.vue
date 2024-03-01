@@ -1,7 +1,17 @@
 <template>
     <q-card class="align-center" style="width: 100%; height:100%;">
-        <q-card-section class="text-h4 text-center text-weight-bold">
-            Incoming Class Calculator
+        <q-card-section class="text-center text-weight-bold">
+            <div class="text-h5 text-weight-bold">Incoming class calculator</div>
+            <div class="text-caption">                
+                <span class="text-weight-medium">How to Use the Calculator: (<router-link  to="/blog/class-builder">read here for more details</router-link>)</span>
+
+                Enter the total pool size (the number of productive full-time equivalents or FTEs you aim to have).
+                Set your target timeframe in years.
+                
+                Adjust the sliders to your current annual retention rate, the average 'fit' rate of new hires, and the average ramp time to productivity.
+                
+                Hit "Generate Graph" to see the results over time.
+            </div>
         </q-card-section>
         <q-card-section horizontal class="row">
             <div class="col-3 q-pa-lg">

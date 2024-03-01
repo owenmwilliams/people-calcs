@@ -11,3 +11,4 @@ declare namespace NodeJS {
 declare module 'd3';
 declare module 'vue3-apexcharts';
 declare module 'papaparse';
+declare module 'jstat';

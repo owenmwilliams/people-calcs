@@ -1,25 +1,31 @@
 <template>
-    <div class="text-h4 q-pt-lg q-pb-md q-px-md">
-        Workforce calculators: building a people-advantage through analytics
+    <div class="q-ma-xl">
+    
+        <div class="text-h4 q-pt-lg q-pb-md q-px-xl">
+        What is this website?
     </div>
 
-    <div class="text-body1 q-pa-md text-weight-normal">
-        By Owen M. Williams
-    </div>
+    <!-- <div class="text-body1 q-pa-md text-weight-normal">
+        Owen M. Williams
+    </div> -->
     
     <div class="text-body2 q-py-sm q-px-xl text-weight-light">
-    Welcome to our corner of the web, a place where we consider the swift and sweeping changes shaping the world of work. As we navigate through this digital age, it's clear that the old maps—drawn in the days of Taylorism and its focus on efficiency above all—can no longer guide us as they once did. Today, the compass points towards innovation, creativity, and the collective spirit of teams that dream and do together.
+    We like to build analytics. We work in the people space. We think there's a lot of room to bring more analytics into the people space.
     </div>
+
     <div class="text-body2 q-py-sm q-px-xl text-weight-light">
-    While our site is a collection of thoughts and findings; it's also a reflection of the ongoing conversation about how work is evolving, influenced by rapid technological growth, shifts in societal values, and a deeper search for meaning within our careers. We're here to explore these changes, not as experts standing apart, but as curious learners and contributors.
+    We also fundamentally believe there will be a shift in the way we think about work and the workplace.
     </div>
+
     <div class="text-body2 q-py-sm q-px-xl text-weight-light">
-    We believe that the narrative of work is being rewritten to highlight the importance of creative teams. These teams are the heartbeat of the modern workplace, driving progress not through the rigid adherence to time-worn practices, but through innovation, adaptability, and a shared vision.
+    Here we seek to understand - through primary resources and working through the numbers - the future of work in a digestable way.
     </div>
+
     <div class="text-body2 q-py-sm q-px-xl text-weight-light">
-    Moreover, it's time to reconceive the role of HR and people teams. Far from being just-another-cost-center, these are the architects and cultivators of workplace cultures where individuals feel valued, engaged, and inspired to contribute their best. In this light, people teams emerge not as overhead but as prime movers in creating competitive advantages that are as human as they are strategic.
+    All calculators / tools on this website are provided free of charge.
     </div>
-    <div class="text-body2 q-py-sm q-px-xl text-weight-light">
-    As we embark on this journey, our aim is to delve into these topics with openness, humility, and a keen eye on real numbers, research, and resources that help shine a light on the path forward.
+
+    <div class="text-h6 q-my-md q-px-xl">If you want to get in touch, you can reach us at support@we3kings.dev</div>
+
     </div>
 </template>

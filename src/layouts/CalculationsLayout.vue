@@ -6,16 +6,16 @@
                 v-ripple 
                 v-for="choice in calculatorChoiceOptions" 
                 :key="choice" 
-                :disable="choice == calculatorChoice"
-                :active="choice == calculatorChoice"
+                :disable="choice == props.calculator"
+                :active="choice == props.calculator"
                 active-class="bg-accent text-white"
-                @click="calculatorChoice = choice">
-                <q-item-section>{{ choice }}</q-item-section>
+                @click="pushToCalculator(choice)">
+                <q-item-section>{{ choice.charAt(0).toUpperCase() + choice.slice(1).replace("-", " ") }}</q-item-section>
             </q-item>
         </q-list>
         <div class="col-10 col-grow q-pa-md">
-            <AttritionCalc v-if="calculatorChoice == 'Class builder'" />
-            <ChannelCalc v-else-if="calculatorChoice == 'Recruitment channel'" />
+            <AttritionCalc v-if="props.calculator == 'class-builder'" />
+            <ChannelCalc v-else-if="props.calculator == 'recruitment-channel'" />
             <BuildInProgress v-else />
         </div>
     </div>
@@ -27,9 +27,22 @@ import ChannelCalc from 'src/pages/ChannelCalc.vue';
 import BuildInProgress from 'src/pages/BuildInProgress.vue';
 
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-  const calculatorChoice = ref('Class builder');
-  const calculatorChoiceOptions = ['Class builder', 'Recruitment channel', 'Reduction in force'] //'Reduction in Force', 'Succession Planning', 'Workforce Planning'];
+const router = useRouter();
+
+const props = defineProps<{
+    calculator: string;
+  }>();
+
+  const pushToCalculator = (calculator: string) => {
+    console.log('pushing to calculator')
+    console.log('calculator', calculator)
+    router.push({ name: 'calculators', params: {calculator: calculator.toLowerCase().replace(/ /g, "-")} })
+  }
+
+//   const calculatorChoice = ref('Class builder');
+  const calculatorChoiceOptions = ['class-builder', 'recruitment-channel'] //'Reduction in Force', 'Succession Planning', 'Workforce Planning'];
 
     const leftDrawerOpen = ref(false);
 

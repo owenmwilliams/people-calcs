@@ -1,5 +1,5 @@
 <template>
-        <div class="row inline no-wrap full-width">
+    <div class="row inline no-wrap full-width">
         <q-list class="col-2">
             <q-item
                 clickable 
@@ -13,16 +13,18 @@
                 <q-item-section>{{ blog }}</q-item-section>
             </q-item>
         </q-list>
-        <div class="col-10 col-grow q-pa-md">
+        <div class="col-8 col-grow q-pa-md">
             <IntroBlog v-if="props.post == 'introduction'" />
             <ClassBuilderBlog v-else-if="props.post == 'class-builder'" />
             <BuildInProgress v-else />
         </div>
+        <div class="col-2">
+
+        </div>
     </div>
-  </template>
+</template>
   
   <script setup lang="ts">
-//   import router from 'src/router';
   import BuildInProgress from 'src/pages/BuildInProgress.vue';
   import IntroBlog from 'src/pages/blogs/IntroBlog.vue';
   import ClassBuilderBlog from 'src/pages/blogs/ClassBuilderBlog.vue';
@@ -31,7 +33,7 @@
 
 const router = useRouter();
 
-  const blogTitles = ["Introduction", "Class Builder"]
+  const blogTitles = ["Introduction", "Class builder"]
   
   const props = defineProps<{
     post: string;

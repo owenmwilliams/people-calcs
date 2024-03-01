@@ -5,7 +5,7 @@
         </q-card-section>
         <q-card-section horizontal class="row">
             <div class="col-3 q-pa-lg">
-                <div class="row full-width">
+                <div class="row full-width q-mb-sm">
                     <q-file class="col-9" v-model="upload" label="Upload touchpoints" />
                     <q-space />
                     <q-btn class="col-3" flat color="accent" label="Submit" @click="onSubmit" />
