@@ -3,20 +3,110 @@
     background-color: #FFFBF5;
 }
 
+// Capito-Regular
 @font-face {
-    font-family: Siche;
-    src: url(./fonts/Siche-Text-0.1-Regular.otf);
+    font-family: 'Capito';
+    font-weight: normal;
+    font-style: normal;
+    src: url('fonts/Capito/Capito04-Regular.woff2') format('woff2');
   }
-
+  
+// Capito-Medium
 @font-face {
-    font-family: Baus;
-    src: url(./fonts/Baustrasev0.5TRIAL-SemiboldTRIAL.otf);
+font-family: 'Capito';
+font-weight: 500; // Medium is often 500 weight
+font-style: normal;
+src: url('fonts/Capito/Capito04-Medium.woff2') format('woff2');
 }
 
-.siche {
-    font-family: 'Siche';
+// Capito-MediumItalic
+@font-face {
+font-family: 'Capito';
+font-weight: 500; // Medium is often 500 weight
+font-style: italic;
+src: url('fonts/Capito/Capito04-MediumItalic.woff2') format('woff2');
 }
 
-.baus {
-    font-family: 'Baus';
+// Capito-SemiBold
+@font-face {
+font-family: 'Capito';
+font-weight: 600; // SemiBold is often 600 weight
+font-style: normal;
+src: url('fonts/Capito/Capito04-SemiBold.woff2') format('woff2');
+}
+
+// Capito-Bold
+@font-face {
+font-family: 'Capito';
+font-weight: bold; // Bold is often 700 weight
+font-style: normal;
+src: url('fonts/Capito/Capito04-Bold.woff2') format('woff2');
+}
+
+// Capito-BoldItalic
+@font-face {
+font-family: 'Capito';
+font-weight: bold; // Bold is often 700 weight
+font-style: italic;
+src: url('fonts/Capito/Capito04-BoldItalic.woff2') format('woff2');
+}
+
+// Capito-Heavy
+@font-face {
+font-family: 'Capito';
+font-weight: 800; // Heavy is often 800 weight
+font-style: normal;
+src: url('fonts/Capito/Capito04-Heavy.woff2') format('woff2');
+}
+
+// Capito-HeavyItalic
+@font-face {
+font-family: 'Capito';
+font-weight: 800; // Heavy is often 800 weight
+font-style: italic;
+src: url('fonts/Capito/Capito04-HeavyItalic.woff2') format('woff2');
+}
+
+// Capito-Black
+@font-face {
+font-family: 'Capito';
+font-weight: 900; // Black is often 900 weight
+font-style: normal;
+src: url('fonts/Capito/Capito04-Black.woff2') format('woff2');
+}
+
+// Capito-Light
+@font-face {
+font-family: 'Capito';
+font-weight: 300; // Light is often 300 weight
+font-style: normal;
+src: url('fonts/Capito/Capito04-Light.woff2') format('woff2');
+}
+
+// Capito-LightItalic
+@font-face {
+font-family: 'Capito';
+font-weight: 300; // Light is often 300 weight
+font-style: italic;
+src: url('fonts/Capito/Capito04-LightItalic.woff2') format('woff2');
+}
+
+// Capito-VAR
+@font-face {
+font-family: 'Capito';
+font-weight: 400; // Assuming VAR is the variable font normal weight
+font-style: normal;
+src: url('fonts/Capito/Capito04VAR.woff2') format('woff2');
+}
+
+// Capito-VARItalic
+@font-face {
+font-family: 'Capito';
+font-weight: 400; // Assuming VARItalic is the variable font italic normal weight
+font-style: italic;
+src: url('fonts/Capito/Capito04VAR-Italic.woff2') format('woff2');
+}
+
+.capito {
+    font-family: 'Capito';
 }
