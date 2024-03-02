@@ -22,8 +22,8 @@
   </template>
 
 <script setup lang="ts">
-import AttritionCalc from 'src/pages/AttritionCalc.vue';
-import ChannelCalc from 'src/pages/ChannelCalc.vue';
+import AttritionCalc from 'src/pages/calculators/AttritionCalc.vue';
+import ChannelCalc from 'src/pages/calculators/ChannelCalc.vue';
 import BuildInProgress from 'src/pages/BuildInProgress.vue';
 
 import { ref } from 'vue';

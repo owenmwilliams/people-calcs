@@ -1,8 +1,8 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" class="siche">
     <q-header>
       <q-toolbar class="text-center">
-        <q-toolbar-title class="text-h5">
+        <q-toolbar-title class="text-h5 siche text-weight-bold" >
           Workforce Calculators
         </q-toolbar-title>
         
