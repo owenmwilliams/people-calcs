@@ -1,3 +1,4 @@
+import BuildInProgressVue from 'pages/BuildInProgress.vue';
 import { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
@@ -8,11 +9,28 @@ const routes: RouteRecordRaw[] = [
     children: [{ path: '', component: () => import('pages/BuildInProgress.vue') }],
   },
   {
-    path: '/calculators/:calculator',
-    name: 'calculators',
-    component: () => import('layouts/CalculationsLayout.vue'),
-    props: true,
+    path: '/calculators/:calculator?',
+    children: [
+      {
+        path: '',
+        name: 'calculators-grid',
+        component: () => import('pages/CalculatorsGrid.vue'),
+      },
+      {
+        path: ':calculator',
+        name: 'calculators',
+        component: () => import('layouts/CalculationsLayout.vue'),
+        props: true,
+      },
+    ],
   },
+
+  // {
+  //   path: '/calculators/:calculator',
+  //   name: 'calculators',
+  //   component: () => import('layouts/CalculationsLayout.vue'),
+  //   props: true,
+  // },
   {
     path: '/blog/:post',
     name: 'blog',

@@ -5,9 +5,18 @@
 
 @font-face {
     font-family: Siche;
-    src: url(./Siche-Text-0.1-Regular.otf);
+    src: url(./fonts/Siche-Text-0.1-Regular.otf);
   }
+
+@font-face {
+    font-family: Baus;
+    src: url(./fonts/Baustrasev0.5TRIAL-SemiboldTRIAL.otf);
+}
 
 .siche {
     font-family: 'Siche';
+}
+
+.baus {
+    font-family: 'Baus';
 }
